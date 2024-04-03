@@ -1,12 +1,16 @@
 public class Main{
     public static void main(String[] args){
-        Conta objA = new Conta();
+        Conta c1 = new Conta();
 
-        objA.dono.nome = "Lobato";
-        objA.saldo = 2300;
-        objA.agencia = "101-2";
-        objA.numero = 314159265;
+        c1.dono.nome = "Lobato";
+        c1.saldo = 2300;
+        c1.agencia = "101-2";
+        c1.numero = 314159265;
 
-        objA.imprimir();
+        //c1.imprimir();
+        c1.saque(100);
+        c1.deposito(600);
+        c1.imprimir();
+        c1.extrato();
     }
 }

@@ -5,6 +5,7 @@ public class Conta{
     private Cliente dono = new Cliente();
     private String agencia;
     private Operacao[] operacoes = new Operacao[0];
+    public static int totalContas = 0;
 
     // Encapsulation
     public Cliente getDono(){
@@ -13,9 +14,30 @@ public class Conta{
     public void setDono(Cliente novoDono){
         this.dono = novoDono;
     }
-
+    public int getNumero(){
+        return this.numero;
+    }
+    public void setNumero(int novoNumero){
+        this.numero = novoNumero;
+    }
+    public double getSaldo(){
+        return this.saldo;
+    }
+    public String getAgencia(){
+        return this.agencia;
+    }
+    public void setAgencia(String novaAgencia){
+        this.agencia = novaAgencia;
+    }
     //
-
+    Conta(String nome, double saldo, String agencia, int numero){
+        this.dono.nome = nome;
+        this.saldo = saldo;
+        this.agencia = agencia;
+        this.numero = numero;
+        totalContas++;
+    }
+    //Methods
     private void registroOperacao(char tipo, double valor){
         Operacao[] operacoesAntiga = operacoes;
         operacoes = new Operacao[operacoes.length+1];
@@ -24,13 +46,12 @@ public class Conta{
         }
         operacoes[operacoes.length-1] = new Operacao(tipo,valor);
     }
-    void extrato(){
-        //System.out.println("Tamanho do extrato : "+operacoes.length);
+    public void extrato(){
         for (Operacao opr : operacoes) {
             System.out.println(opr.data + "\t" + opr.tipo + "\t" + opr.valor);
         }
     }
-    boolean deposito(double valor){
+    public boolean deposito(double valor){
         if (valor > 0) {
             this.saldo += valor;
             registroOperacao('d', valor);
@@ -38,7 +59,7 @@ public class Conta{
         }
         return false;
     }
-    boolean saque(double valor){
+    public boolean saque(double valor){
         if (valor > 0 && valor <= this.saldo) {
             this.saldo -= valor;
             registroOperacao('s', valor);
@@ -46,7 +67,7 @@ public class Conta{
         }
         return false;
     }
-    boolean transferir(Conta destino, double valor){
+    public boolean transferir(Conta destino, double valor){
         boolean saque = this.saque(valor);
         if (saque){
             boolean deposito = destino.deposito(valor);
@@ -54,7 +75,8 @@ public class Conta{
         }
         return false;
     }
-    void imprimir(){
+    public void imprimir(){
         System.out.printf("Dono : %s\nSaldo : %.2f\nNumero : %d\nAgencia : %s\n", this.dono.nome, this.saldo, this.numero, this.agencia);
     }
+    //
 }

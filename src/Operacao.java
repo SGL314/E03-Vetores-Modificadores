@@ -2,19 +2,34 @@ import java.util.Date;
 
 public class Operacao {
 
-    /* Data de realização da operação */
     public Date data;
-
-    /* Tipo da operação */
     public char tipo;
-
-    /* Valor da operação */
     public double valor;
+    public static int totalOperacoes = 0;
 
     public Operacao(char tipo, double valor) {
         this.tipo = tipo;
         this.valor = valor;
         data = new Date();
+        totalOperacoes++;
     }
+
+    // Encapsulation
+    public Date getData(){
+        return this.data;
+    }
+    public char getTipo(){
+        return this.tipo;
+    }
+    public void setTipo(char novoTipo){
+        this.tipo = novoTipo;
+    }
+    public double getValor(){
+        return this.valor;
+    }
+    public void setValor(double novoValor){
+        this.valor = novoValor;
+    }
+    //
 
 }
